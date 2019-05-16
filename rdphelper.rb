@@ -71,4 +71,5 @@ system('xfreerdp',
        "/kbd:#{keyboardlayout}",
        "/w:#{windowwidth}",
        "/h:#{windowheigt}",
+       '/dynamic-resolution',
        '/cert-tofu')
