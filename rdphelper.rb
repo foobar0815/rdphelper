@@ -62,6 +62,10 @@ hostgroups[chosen_group]['hosts'].each do |h|
 end
 
 chosen_host = Fuzz::Selector.new(hosts, picker: picker).pick
+# secret-tool store --label "administrator@corp.contoso.com" application rdphelper username administrator@corp.contoso.com
+unless chosen_host.password 
+  chosen_host.password = %x(secret-tool lookup application rdphelper username #{chosen_host.username}@#{chosen_host.domain})
+end
 
 system('xfreerdp',
        "/u:#{chosen_host.username}",
